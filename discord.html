@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyHavoc Authorization</title>
     <script>
-        window.onload = function() {
-            // Get the code from the URL parameters
+        function returnToGame() {
             var params = window.location.search;
             var game_link = "skyhavoc://auth" + params;
-            
-            // Set the link to the fallback button
-            document.getElementById("btn-return").href = game_link;
-            
-            // Attempt automatic redirect to the game
             window.location.href = game_link;
+        }
+
+        window.onload = function() {
+            // Automatický pokus o návrat do hry za půl vteřiny
+            setTimeout(returnToGame, 500);
         }
     </script>
 </head>
@@ -23,8 +22,9 @@
     <p>Authorization successful.</p>
     <p style="font-size: 14px; color: #888;">If the game does not open automatically, click the button below:</p>
     
-    <a id="btn-return" href="#" style="background-color: #5865F2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 20px;">
+    <!-- Místo odkazu je zde tlačítko, které natvrdo zavolá Javascript -->
+    <button onclick="returnToGame()" style="background-color: #5865F2; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 20px;">
         Return to Hangar
-    </a>
+    </button>
 </body>
 </html>
