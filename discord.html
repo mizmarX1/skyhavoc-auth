@@ -8,28 +8,17 @@
 <body style="background-color: #1e1e24; color: white; text-align: center; font-family: sans-serif; padding-top: 15%;">
     <h2>SKYHAVOC</h2>
     <p>Authorization successful.</p>
-    <p style="font-size: 14px; color: #888;">If the game does not open automatically, click the button below:</p>
+    <p style="font-size: 14px; color: #888;">Click the button below to return to the game:</p>
     
-    <!-- Tlačítko jako čistý HTML odkaz, na který Chrome stoprocentně reaguje -->
-    <a id="btn-return" href="#" style="background-color: #5865F2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 20px;">
+    <!-- Obyčejný, tvrdý odkaz. Žádná mřížka. -->
+    <a id="btn-return" href="skyhavoc://auth" style="background-color: #5865F2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 20px;">
         Return to Hangar
     </a>
 
     <script>
-        window.onload = function() {
-            var params = window.location.search; // Obsahuje "?code=XYZ"
-            
-            // MAGIE PRO CHROME: Speciální formát "intent://"
-            var chrome_intent = "intent://auth" + params + "#Intent;scheme=skyhavoc;action=android.intent.action.VIEW;end;";
-            
-            // Nastavíme tento odkaz do tlačítka
-            document.getElementById("btn-return").href = chrome_intent;
-            
-            // Zkusíme ho rovnou odpálit automaticky (Chrome to občas povolí, občas ne)
-            setTimeout(function() {
-                window.location.href = chrome_intent;
-            }, 500);
-        }
+        // Javascript tu udělá jedinou věc: vezme Discord kód z adresy a přilepí ho k tlačítku
+        var parametry = window.location.search;
+        document.getElementById("btn-return").href = "skyhavoc://auth" + parametry;
     </script>
 </body>
 </html>
