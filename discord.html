@@ -10,15 +10,23 @@
     <p>Authorization successful.</p>
     <p style="font-size: 14px; color: #888;">Click the button below to return to the game:</p>
     
-    <!-- Obyčejný, tvrdý odkaz. Žádná mřížka. -->
-    <a id="btn-return" href="skyhavoc://auth" style="background-color: #5865F2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 20px;">
+    <button onclick="returnToGame()" style="background-color: #5865F2; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 20px;">
         Return to Hangar
-    </a>
+    </button>
 
     <script>
-        // Javascript tu udělá jedinou věc: vezme Discord kód z adresy a přilepí ho k tlačítku
-        var parametry = window.location.search;
-        document.getElementById("btn-return").href = "skyhavoc://auth" + parametry;
+        function returnToGame() {
+            var params = window.location.search; // Získá ?code=XYZ
+            
+            // >>> TADY VLOŽ SVŮJ UNIQUE NAME Z GODOTU (např. org.godotengine.skyhavoc) <<<
+            var package_name = "com.mizmar.skyhavoc"; 
+            
+            // Tohle je ten VIP příkaz, kterému Android neodporuje
+            var chrome_intent = "intent://auth" + params + "#Intent;scheme=skyhavoc;package=" + package_name + ";action=android.intent.action.VIEW;end;";
+            
+            // Odpálení
+            window.location.href = chrome_intent;
+        }
     </script>
 </body>
 </html>
