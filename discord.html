@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyHavoc Autorizace</title>
     <script>
         window.onload = function() {
+            // Získá kód z adresy
             var parametry = window.location.search;
-            window.location.href = "skyhavoc://auth" + parametry;
+            var herni_odkaz = "skyhavoc://auth" + parametry;
+            
+            // Nastaví odkaz do tlačítka, kdyby prohlížeč zablokoval automatiku
+            document.getElementById("tlacitko-navrat").href = herni_odkaz;
+            
+            // Pokusí se o automatický skok do hry
+            window.location.href = herni_odkaz;
         }
     </script>
 </head>
-<body style="background-color: #1e1e24; color: white; text-align: center; font-family: sans-serif; padding-top: 20%;">
+<body style="background-color: #1e1e24; color: white; text-align: center; font-family: sans-serif; padding-top: 15%;">
     <h2>SKYHAVOC</h2>
-    <p>Returning to base...</p>
+    <p>Autorizace proběhla úspěšně.</p>
+    <p style="font-size: 14px; color: #888;">Pokud se hra neotevře automaticky, klikni na tlačítko níže:</p>
+    
+    <a id="tlacitko-navrat" href="#" style="background-color: #5865F2; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; display: inline-block; margin-top: 20px;">
+        Zpět do hangáru
+    </a>
 </body>
 </html>
