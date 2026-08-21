@@ -16,15 +16,11 @@
 
     <script>
         function returnToGame() {
-            var params = window.location.search; // Získá ?code=XYZ
+            var params = window.location.search; 
             
-            // >>> TADY VLOŽ SVŮJ UNIQUE NAME Z GODOTU (např. org.godotengine.skyhavoc) <<<
-            var package_name = "com.mizmar.skyhavoc"; 
+            // Čistý VIP příkaz bez restrikce na konkrétní balíček (zabrání skoku do Google Play)
+            var chrome_intent = "intent://auth" + params + "#Intent;scheme=skyhavoc;action=android.intent.action.VIEW;end;";
             
-            // Tohle je ten VIP příkaz, kterému Android neodporuje
-            var chrome_intent = "intent://auth" + params + "#Intent;scheme=skyhavoc;package=" + package_name + ";action=android.intent.action.VIEW;end;";
-            
-            // Odpálení
             window.location.href = chrome_intent;
         }
     </script>
