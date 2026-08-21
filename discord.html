@@ -3,23 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SkyHavoc Authorization</title>
+    <title>SkyHavoc Auth</title>
 </head>
 <body style="background-color: #1e1e24; color: white; text-align: center; font-family: sans-serif; padding-top: 15%;">
     <h2>SKYHAVOC</h2>
-    <p>Autorizace na Androidu byla úspěšná.</p>
-    <p style="font-size: 14px; color: #888;">Klikni na tlačítko níže pro návrat do hangáru:</p>
+    <p>Autorizace úspěšná!</p>
     
-    <button onclick="returnToGame()" style="background-color: #5865F2; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 20px;">
+    <button onclick="navratDoHry()" style="background-color: #5865F2; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-weight: bold; font-size: 18px; cursor: pointer; margin-top: 20px;">
         Zpět do hry
     </button>
 
     <script>
-        function returnToGame() {
-            var params = window.location.search; 
-            // Magický VIP Intent s TVÝM správným názvem balíčku, který Chrome neodmítne
-            var chrome_intent = "intent://auth" + params + "#Intent;scheme=skyhavoc;package=com.mizmar.skyhavoc;action=android.intent.action.VIEW;end;";
-            window.location.href = chrome_intent;
+        function navratDoHry() {
+            var params = new URLSearchParams(window.location.search);
+            var code = params.get("code");
+            if (code) {
+                // 1. Zkopíruje kód do schránky
+                navigator.clipboard.writeText(code).then(function() {
+                    // 2. Okamžitě probudí hru v telefonu!
+                    var chrome_intent = "intent://auth#Intent;scheme=skyhavoc;package=com.mizmar.skyhavoc;action=android.intent.action.VIEW;end;";
+                    window.location.href = chrome_intent;
+                });
+            }
         }
     </script>
 </body>
